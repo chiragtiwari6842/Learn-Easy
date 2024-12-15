@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Classroom</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Enter a Topic for the Class</h1>
+        <textarea id="topicInput" placeholder="Write any topic here..."></textarea>
+        <button id="scheduleButton">Schedule Class</button>
+        <button id="testButton" class="hidden">Take Test</button>
+        <div>
+            <label for="voice-select">Choose a Voice</label>
+            <select id="voice-select">
+                <option value="disabled selected">Select a Voice</option>
+            </select>
+        </div>
+        <button id="speak-btn" class="hidden">Speak</button>
+        <p id="responseMessage"></p>
+    </div>
+    <div id="transcriptBox" style="border: 1px solid #ccc; padding: 10px; margin-top: 20px; height: 300px; overflow-y: scroll; background-color: #f9f9f9;">
+        <h3>Transcript</h3>
+        <div id="transcriptContent"></div>
+    </div>
+    
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
