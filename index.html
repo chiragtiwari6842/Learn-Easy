@@ -5,6 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Classroom</title>
     <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .voice-option {
+            width: 4cm;
+            height: 4cm;
+            display: inline-block;
+            border: 8px solid #ccc;
+            margin: 10px;
+            cursor: pointer;
+            position: relative;
+            transition: border 0.3s;
+            text-align: center;
+            font-size: 0.8em;
+            overflow: hidden;
+        }
+        .voice-option.selected {
+            border-color: #ff9a9e;
+        }
+        .voice-option.active::after {
+            height: 0.5cm; 
+        }
+        .voice-option::after {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ff9a9e;
+            height: 0; 
+            transition: height 0.3s;
+        }
+        .voice-option div {
+            margin-top: 10px;  
+            font-size: 0.9em;  
+            color: #333;  
+        }
+        
+        .voice-option img {
+            width: 100%;
+            height: auto;
+            border-bottom: 2px solid #ccc;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -13,10 +54,25 @@
         <button id="scheduleButton">Schedule Class</button>
         <button id="testButton" class="hidden">Take Test</button>
         <div>
-            <label for="voice-select" id="voice-text">Choose a Voice</label>
-            <select id="voice-select">
-                <option value="disabled selected">Select a Voice</option>
-            </select>
+            <label for="voice-select" id="voice-text">Choose a Lecturer</label>
+            <div id="voice-select">
+                <div class="voice-option" id="lecturer-1" onclick="selectVoice('lecturer-1')">
+                    <div>Steve</div>
+                    <img src="https://images.chesscomfiles.com/uploads/v1/bot_personality/f900bba2-8a59-11ea-9b00-77e384ff7d49.3f025953.384x384o.89a5f2a1cb5c.png" alt="Steve">
+                </div>
+                <div class="voice-option" id="lecturer-2" onclick="selectVoice('lecturer-2')">
+                    <div>Madhuri</div>
+                    <img src="https://images.chesscomfiles.com/uploads/v1/bot_personality/5256c8cc-2959-11ed-a9ac-69d9fb8bbc8e.8c3f981b.384x384o.7afa3b84541c.png" alt="Madhuri">
+                </div>
+                <div class="voice-option" id="lecturer-3" onclick="selectVoice('lecturer-3')">
+                    <div>Prasad</div>
+                    <img src="https://images.chesscomfiles.com/uploads/v1/bot_personality/c30dab58-2959-11ed-9fdd-07fcef227fce.a7454124.384x384o.7644fae23526.png" alt="Prasad">
+                </div>
+                <div class="voice-option" id="lecturer-4" onclick="selectVoice('lecturer-4')">
+                    <div>Natasha</div>
+                    <img src="https://images.chesscomfiles.com/uploads/v1/bot_personality/6b95f31c-8cd4-11eb-9726-ebd8bfd958e0.2c91a405.384x384o.8f2219aed2db.png" alt="Natasha"
+                </div>
+            </div>
         </div>
         <p id="responseMessage"></p>
         <div id="linkContainer" class="hidden">
@@ -25,5 +81,17 @@
         </div>
     </div>    
     <script src="assets/js/main.js"></script>
+    <script>
+        function selectVoice(voiceId) {
+            const voiceOptions = document.querySelectorAll('.voice-option');
+            voiceOptions.forEach(option => {
+                option.classList.remove('selected');
+                option.classList.remove('active'); 
+            });
+            const selectedOption = document.getElementById(voiceId);
+            selectedOption.classList.add('selected');
+            selectedOption.classList.add('active');
+        }
+    </script>
 </body>
 </html>
