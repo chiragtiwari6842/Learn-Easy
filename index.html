@@ -13,13 +13,16 @@
         <button id="scheduleButton">Schedule Class</button>
         <button id="testButton" class="hidden">Take Test</button>
         <div>
-            <label for="voice-select">Choose a Voice</label>
+            <label for="voice-select" id="voice-text">Choose a Voice</label>
             <select id="voice-select">
                 <option value="disabled selected">Select a Voice</option>
             </select>
         </div>
-        <button id="speak-btn" class="hidden">Speak</button>
         <p id="responseMessage"></p>
+        <div id="linkContainer" class="hidden">
+            <p>Click the link below to join:</p>
+            <a id="classLink" href="#" target="_blank">Join your class</a>
+        </div>
     </div>    
     <script src="assets/js/main.js"></script>
 </body>
