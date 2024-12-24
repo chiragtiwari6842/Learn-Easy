@@ -35,16 +35,16 @@ scheduleButton.addEventListener("click", async () => {
                 return;
             }
             const data = await response.json();
-            console.log(data);
+            // console.log(data);
             localStorage.setItem("questions", JSON.stringify(data.questions));
             localStorage.setItem("content", data.content);
 
-            console.log(localStorage.getItem("questions"));
-            console.log(localStorage.getItem("content"));
+            // console.log(localStorage.getItem("questions"));
+            // console.log(localStorage.getItem("content"));
 
             // Fetching link inside this try block
             try {
-                const response = await fetch("http://192.168.1.237:5000/get_link", {
+                const response = await fetch("http://192.168.43.161:5000/get_link", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -58,11 +58,11 @@ scheduleButton.addEventListener("click", async () => {
                     return;
                 }
                 const data = await response.json();
-                console.log(data);
+                // console.log(data);
                 
                 localStorage.setItem("link", data.link);
-                console.log(localStorage.getItem("link"));
-                classLink.href = link; +6+++++++++++++++++  
+                // console.log(localStorage.getItem("link"));
+                classLink.href = link;
                 classLink.textContent = link;
             }
             catch(error) {
@@ -98,6 +98,10 @@ scheduleButton.addEventListener("click", async () => {
 
 classLink.addEventListener("click", (event) => {
     console.log("Zoom link clicked!");
+    setTimeout(() => {
+        const selectedVoiceId = document.querySelector('.voice-option.selected').id;
+        speakContent(selectedVoiceId);
+    }, 120000);
 });
 
 function createLoadingBar() {
@@ -116,3 +120,42 @@ function removeLoadingBar() {
 testButton.addEventListener("click", async () => {
     window.location.href = "questions.html";
 });
+
+const voices = {
+    "lecturer-1": "Microsoft David - English (United States)",  
+    "lecturer-2": "Microsoft Heera - English (India)", 
+    "lecturer-3": "Microsoft Ravi - English (India)", 
+    "lecturer-4": "Google UK English Female"  
+};
+
+const content = localStorage.getItem("content");
+
+let availableVoices = [];
+
+function loadVoices() {
+    availableVoices = speechSynthesis.getVoices();
+
+    if (availableVoices.length === 0) {
+        setTimeout(loadVoices, 100);
+    }
+}
+
+speechSynthesis.onvoiceschanged = loadVoices;
+
+loadVoices();
+
+function speakContent(voiceId) {
+    const selectedVoice = voices[voiceId];
+    const utterance = new SpeechSynthesisUtterance(content);
+    const availableVoices = speechSynthesis.getVoices();
+
+    const voice = availableVoices.find(v => v.name === selectedVoice);
+
+    if (voice) {
+        utterance.voice = voice;
+        speechSynthesis.speak(utterance);
+    } else {
+        console.error("Voice not found: " + selectedVoice);
+    }
+}
+
